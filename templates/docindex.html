@@ -10,14 +10,13 @@
             </form>
             <h2>Query:</h2>
             {% if query_path %}
-            <img src="{{ query_path }}" width="300px">
+            <p>{{ query_path }}</p>
             {% endif %}
             <h2>Results:</h2>
-            {% for score in scores %}
-            <figure style="float: left; margin-right: 20px; margin-bottom: 20px;">
-                <img src="{{ score[1] }}" height="200px">
-                <figcaption>{{ score[0] }}</figcaption>
-            </figure>
+            {% set count=[1] %}
+            {% for d,s in docs %}
+                <a href="file://{{ d }}">Document {{count}}</a> - {{s}}<br>
+                {% if count.append(count.pop() + 1) %}{% endif %} {# increment count by 1 #}
             {% endfor %}
         </div>
     </body>
